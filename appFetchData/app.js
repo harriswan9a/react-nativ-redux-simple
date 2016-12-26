@@ -15,8 +15,16 @@ import * as authAction from './actions/authAction';
 
 class App extends Component {
 
+    componentDidMount() {
+        // this.props.authActions.fetchUser('0005963');
+    };
+
+    fetchUser() {
+
+    }
+
     render() {
-        const {number, counterActions, authActions, isLogin} = this.props;
+        const {number, counterActions, authActions, isLogin, resp} = this.props;
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
@@ -33,9 +41,11 @@ class App extends Component {
                 <Button onPress={counterActions.decrementAction} title="-" color="red"/>
 
                 <Text>
-                    目前登入狀態：{`${isLogin}`}
+                    目前登入狀態：{`${isLogin}`}{'\n'}
+                    { `${JSON.stringify(resp)}`}
                 </Text>
-                <Button onPress={authActions.loginAction} title="Login" color="red"/>
+                {/*<Button onPress={authActions.loginAction} title="Login" color="red"/>*/}
+        <Button onPress={() => this.props.authActions.fetchUser('0005963')} title="Login" color="red"/>
                 <Button onPress={authActions.logoutAction} title="Logout" color="red"/>
             </View>
         );
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
 
 //從store接收state更新通知
 const mapStateToProps = (state) => {
-    return {number: state.counterReducer.number, isLogin: state.authReducer.isLogin}
+    return {number: state.counterReducer.number, isLogin: state.authReducer.isLogin, resp: state.authReducer.resp}
 }
 
 //綁定Action、Dispatch傳給props
