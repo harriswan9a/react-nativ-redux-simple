@@ -5,5 +5,6 @@
  */
 import {AppRegistry} from 'react-native';
 import App from './app'
+import appUseReduxRoot from './appUseRedux'
 
-AppRegistry.registerComponent('testRedux', () => App);
+AppRegistry.registerComponent('testRedux', () => appUseReduxRoot);
